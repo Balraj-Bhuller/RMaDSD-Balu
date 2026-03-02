@@ -9,8 +9,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/loading.css">
 </head>
 <body>
+    <!-- Boot / Loading Screen -->
+    <div id="boot-screen">
+        <div class="boot-scanlines"></div>
+        <div class="boot-content">
+            <div class="boot-logo">
+                <svg class="boot-logo-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="boot-ring boot-ring-3" cx="60" cy="60" r="54" stroke-width="1" stroke-dasharray="8 6"/>
+                    <circle class="boot-ring boot-ring-2" cx="60" cy="60" r="42" stroke-width="1.5" stroke-dasharray="12 4"/>
+                    <circle class="boot-ring boot-ring-1" cx="60" cy="60" r="30" stroke-width="2" stroke-dasharray="20 6"/>
+                    <polygon class="boot-hex" points="60,44 73,51.5 73,68.5 60,76 47,68.5 47,51.5" stroke-width="1.5"/>
+                    <line class="boot-spoke" x1="60" y1="30" x2="60" y2="44" stroke-width="1"/>
+                    <line class="boot-spoke" x1="60" y1="76" x2="60" y2="90" stroke-width="1"/>
+                    <line class="boot-spoke" x1="30" y1="60" x2="47" y2="60" stroke-width="1"/>
+                    <line class="boot-spoke" x1="73" y1="60" x2="90" y2="60" stroke-width="1"/>
+                    <circle class="boot-core" cx="60" cy="60" r="5"/>
+                </svg>
+            </div>
+            <div class="boot-text-sequence" id="boot-text-sequence"></div>
+            <div class="boot-progress-wrap">
+                <div class="boot-progress-bar">
+                    <div class="boot-progress-fill" id="boot-progress-fill"></div>
+                </div>
+                <span class="boot-percentage" id="boot-percentage">0%</span>
+            </div>
+            <div class="boot-final" id="boot-final">RMaDSD // SYSTEM ONLINE</div>
+        </div>
+    </div>
+
     <!-- Scan-line overlay -->
     <div class="scanline-overlay"></div>
 
@@ -191,6 +220,7 @@
         </div>
     </footer>
 
+    <script src="js/loading.js"></script>
     <script src="js/particles.js"></script>
     <script src="js/main.js"></script>
 </body>
