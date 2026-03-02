@@ -48,147 +48,434 @@
 
     <!-- Top Navigation -->
     <nav class="top-nav">
-        <div class="nav-logo">
-            <span class="logo-bracket">[</span>
-            <span class="logo-text">RMaDSD</span>
-            <span class="logo-bracket">]</span>
+        <div class="nav-left">
+            <!-- Back Button: hidden on default section, shown inside nav when on other sections -->
+            <button class="back-btn hidden" id="back-btn" aria-label="Return to Mission Briefing">
+                ◄ RETURN TO BASE
+            </button>
+            <div class="nav-logo">
+                <span class="logo-bracket">[</span>
+                <span class="logo-text">RMaDSD</span>
+                <span class="logo-bracket">]</span>
+            </div>
         </div>
         <ul class="nav-links">
-            <li><a href="#" class="nav-link active" data-section="systems">SYSTEMS</a></li>
-            <li><a href="#" class="nav-link" data-section="command">COMMAND</a></li>
-            <li><a href="#" class="nav-link" data-section="intel">INTEL</a></li>
-            <li><a href="#" class="nav-link" data-section="archive">ARCHIVE</a></li>
-            <li><a href="#" class="nav-link" data-section="network">NETWORK</a></li>
+            <li><a href="#mission-briefing" class="nav-link active" data-section="mission-briefing">MISSION BRIEFING</a></li>
+            <li><a href="#arsenal"          class="nav-link"        data-section="arsenal">ARSENAL &amp; RESOURCES</a></li>
+            <li><a href="#field-operations" class="nav-link"        data-section="field-operations">FIELD OPERATIONS</a></li>
+            <li><a href="#mission-debrief"  class="nav-link"        data-section="mission-debrief">MISSION DEBRIEF</a></li>
         </ul>
-        <div class="nav-status">
-            <span class="status-indicator online"></span>
-            <span class="status-text">UPLINK ACTIVE</span>
+        <div class="nav-right">
+            <div class="nav-status">
+                <span class="status-indicator online"></span>
+                <span class="status-text">UPLINK ACTIVE</span>
+            </div>
+            <!-- Hamburger: visible on mobile only -->
+            <button class="hamburger-btn" id="hamburger-btn" aria-label="Open navigation menu">☰</button>
         </div>
     </nav>
 
-    <!-- Main Content Grid -->
-    <main class="hud-grid">
+    <!-- Mobile Nav Overlay (dim background) -->
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
 
-        <!-- Left Sidebar: System Status -->
-        <aside class="panel panel-left" id="system-status">
-            <div class="panel-corner tl"></div>
-            <div class="panel-corner tr"></div>
-            <div class="panel-corner bl"></div>
-            <div class="panel-corner br"></div>
-            <div class="panel-header">
-                <span class="panel-icon">◆</span>
-                <h2>SYSTEM STATUS</h2>
-            </div>
-            <div class="panel-content">
-                <ul class="status-list">
-                    <li class="status-item">
-                        <span class="status-dot online"></span>
-                        <span class="status-name">CORE PROCESSOR</span>
-                        <span class="status-value online">ONLINE</span>
-                    </li>
-                    <li class="status-item">
-                        <span class="status-dot online"></span>
-                        <span class="status-name">NEURAL NETWORK</span>
-                        <span class="status-value online">ONLINE</span>
-                    </li>
-                    <li class="status-item">
-                        <span class="status-dot warning"></span>
-                        <span class="status-name">FIREWALL MATRIX</span>
-                        <span class="status-value warning">CAUTION</span>
-                    </li>
-                    <li class="status-item">
-                        <span class="status-dot online"></span>
-                        <span class="status-name">DATA STREAM</span>
-                        <span class="status-value online">ONLINE</span>
-                    </li>
-                    <li class="status-item">
-                        <span class="status-dot offline"></span>
-                        <span class="status-name">QUANTUM RELAY</span>
-                        <span class="status-value offline">OFFLINE</span>
-                    </li>
-                    <li class="status-item">
-                        <span class="status-dot online"></span>
-                        <span class="status-name">ENCRYPTION</span>
-                        <span class="status-value online">ONLINE</span>
-                    </li>
-                    <li class="status-item">
-                        <span class="status-dot warning"></span>
-                        <span class="status-name">SATELLITE LINK</span>
-                        <span class="status-value warning">UNSTABLE</span>
-                    </li>
-                    <li class="status-item">
-                        <span class="status-dot online"></span>
-                        <span class="status-name">MEMORY BANKS</span>
-                        <span class="status-value online">ONLINE</span>
-                    </li>
-                </ul>
-            </div>
-        </aside>
+    <!-- Mobile Slide-In Nav Panel -->
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+        <div class="mobile-nav-header">
+            <span class="mobile-nav-logo">[ RMaDSD ]</span>
+            <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close navigation">✕</button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="#mission-briefing" class="mobile-nav-link" data-section="mission-briefing">MISSION BRIEFING</a></li>
+            <li><a href="#arsenal"          class="mobile-nav-link" data-section="arsenal">ARSENAL &amp; RESOURCES</a></li>
+            <li><a href="#field-operations" class="mobile-nav-link" data-section="field-operations">FIELD OPERATIONS</a></li>
+            <li><a href="#mission-debrief"  class="mobile-nav-link" data-section="mission-debrief">MISSION DEBRIEF</a></li>
+        </ul>
+    </nav>
 
-        <!-- Center: Command Panel -->
-        <section class="panel panel-center" id="command-center">
-            <div class="panel-corner tl"></div>
-            <div class="panel-corner tr"></div>
-            <div class="panel-corner bl"></div>
-            <div class="panel-corner br"></div>
-            <div class="panel-header">
-                <span class="panel-icon">◆</span>
-                <h2>COMMAND CENTER</h2>
-                <span class="panel-badge">CLASSIFIED</span>
+    <!-- Terminal Loading Overlay -->
+    <div class="terminal-overlay" id="terminal-overlay" aria-hidden="true">
+        <div class="terminal-window">
+            <div class="terminal-win-header">
+                <div class="terminal-win-dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <span class="terminal-win-title">// SECURE CHANNEL</span>
             </div>
-            <div class="panel-content">
-                <div class="command-hero">
-                    <div class="hex-decorator"></div>
-                    <h1 class="glitch-text" data-text="RMaDSD INTERFACE">RMaDSD INTERFACE</h1>
-                    <p class="command-subtitle">ADVANCED TACTICAL OPERATIONS SYSTEM v4.7.2</p>
-                </div>
-                <div class="command-stats">
-                    <div class="stat-box">
-                        <span class="stat-label">THREAT LEVEL</span>
-                        <span class="stat-value" data-target="LOW">LOW</span>
-                        <div class="stat-bar"><div class="stat-fill" style="width: 25%;"></div></div>
-                    </div>
-                    <div class="stat-box">
-                        <span class="stat-label">SYSTEM INTEGRITY</span>
-                        <span class="stat-value" data-target="94.7">94.7%</span>
-                        <div class="stat-bar"><div class="stat-fill" style="width: 94.7%;"></div></div>
-                    </div>
-                    <div class="stat-box">
-                        <span class="stat-label">ACTIVE PROTOCOLS</span>
-                        <span class="stat-value counter" data-target="2847">0</span>
-                        <div class="stat-bar"><div class="stat-fill" style="width: 72%;"></div></div>
-                    </div>
-                    <div class="stat-box">
-                        <span class="stat-label">NETWORK COVERAGE</span>
-                        <span class="stat-value" data-target="87.3">87.3%</span>
-                        <div class="stat-bar"><div class="stat-fill" style="width: 87.3%;"></div></div>
-                    </div>
-                </div>
-                <div class="command-readout">
-                    <div class="readout-line">> INITIALIZING COMMAND INTERFACE...</div>
-                    <div class="readout-line">> ALL SYSTEMS NOMINAL</div>
-                    <div class="readout-line">> SECURE CHANNEL ESTABLISHED</div>
-                    <div class="readout-line">> AWAITING OPERATOR INPUT<span class="cursor-blink">_</span></div>
-                </div>
-            </div>
-        </section>
+            <div class="terminal-body" id="terminal-body"></div>
+        </div>
+    </div>
 
-        <!-- Right Sidebar: Network Feed -->
-        <aside class="panel panel-right" id="network-feed">
-            <div class="panel-corner tl"></div>
-            <div class="panel-corner tr"></div>
-            <div class="panel-corner bl"></div>
-            <div class="panel-corner br"></div>
-            <div class="panel-header">
-                <span class="panel-icon">◆</span>
-                <h2>INTEL FEED</h2>
-            </div>
-            <div class="panel-content">
-                <div class="feed-list" id="feed-list">
-                    <!-- Feed items injected by JS -->
+    <!-- ======================================================
+         SECTION PAGES
+         Each section is hidden by default; navigation.js
+         adds the .active class to show the current section.
+         ====================================================== -->
+    <main class="sections-container">
+
+        <!-- ══════════════════════════════════════════
+             SECTION 1: MISSION BRIEFING (Default)
+             ══════════════════════════════════════════ -->
+        <section class="section-page" id="section-mission-briefing">
+            <div class="section-header">
+                <div class="section-title-bar">
+                    <span class="section-icon">◆</span>
+                    <h1 class="section-title">MISSION BRIEFING</h1>
+                    <span class="section-status">// ACTIVE</span>
                 </div>
+                <!-- EDIT: Update the subtitle below -->
+                <div class="section-subtitle">Project Overview &amp; Objectives</div>
             </div>
-        </aside>
+
+            <div class="section-body">
+
+                <!-- Hero -->
+                <div class="mission-hero">
+                    <!-- EDIT: Replace the title text with your project name -->
+                    <h2 class="mission-hero-title glitch-text" data-text="RMaDSD INTERFACE">RMaDSD INTERFACE</h2>
+                    <!-- EDIT: Replace the paragraph below with your project overview -->
+                    <p class="mission-hero-text">Add your project description here. Describe what this project is, what it does, and why it matters. This is the first thing visitors will read.</p>
+                </div>
+
+                <!-- Featured Media Placeholder -->
+                <!-- EDIT: Replace this div with <img src="your-image.jpg" alt="Project"> or a video embed -->
+                <div class="media-placeholder featured-media">
+                    <span class="media-placeholder-text">[ INSERT IMAGE ]</span>
+                    <span class="media-placeholder-sub">Replace with your featured project image</span>
+                </div>
+
+                <!-- Mission Objectives -->
+                <div class="section-block">
+                    <div class="block-header">
+                        <span class="block-icon">◆</span>
+                        <h3 class="block-title">MISSION OBJECTIVES</h3>
+                    </div>
+                    <!-- EDIT: Replace these list items with your actual project goals -->
+                    <ul class="hud-list">
+                        <li class="hud-list-item"><span class="hud-bullet">▶</span>Objective 1 — Add your first goal here</li>
+                        <li class="hud-list-item"><span class="hud-bullet">▶</span>Objective 2 — Add your second goal here</li>
+                        <li class="hud-list-item"><span class="hud-bullet">▶</span>Objective 3 — Add your third goal here</li>
+                        <li class="hud-list-item"><span class="hud-bullet">▶</span>Objective 4 — Add your fourth goal here</li>
+                    </ul>
+                </div>
+
+                <!-- Mission Parameters Info Grid -->
+                <div class="section-block">
+                    <div class="block-header">
+                        <span class="block-icon">◆</span>
+                        <h3 class="block-title">MISSION PARAMETERS</h3>
+                    </div>
+                    <!-- EDIT: Update each value cell with your project details -->
+                    <div class="info-grid">
+                        <div class="info-cell">
+                            <span class="info-label">PROJECT DATE</span>
+                            <span class="info-value">2024</span>
+                        </div>
+                        <div class="info-cell">
+                            <span class="info-label">TEAM</span>
+                            <span class="info-value">SOLO / TEAM NAME</span>
+                        </div>
+                        <div class="info-cell">
+                            <span class="info-label">STATUS</span>
+                            <span class="info-value info-online">ACTIVE</span>
+                        </div>
+                        <div class="info-cell">
+                            <span class="info-label">CLASSIFICATION</span>
+                            <span class="info-value">PROJECT</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /section-body -->
+        </section><!-- /section-mission-briefing -->
+
+
+        <!-- ══════════════════════════════════════════
+             SECTION 2: ARSENAL & RESOURCES
+             ══════════════════════════════════════════ -->
+        <section class="section-page" id="section-arsenal">
+            <div class="section-header">
+                <div class="section-title-bar">
+                    <span class="section-icon">◆</span>
+                    <h1 class="section-title">ARSENAL &amp; RESOURCES</h1>
+                    <span class="section-status">// ACTIVE</span>
+                </div>
+                <!-- EDIT: Update the subtitle below -->
+                <div class="section-subtitle">Materials, Tools &amp; Components Deployed</div>
+            </div>
+
+            <div class="section-body">
+
+                <!-- EDIT: Replace each card below with your actual tools/materials/resources -->
+                <div class="arsenal-grid">
+
+                    <!-- Card 1 -->
+                    <div class="arsenal-card">
+                        <!-- EDIT: Replace [ICON] with an <img> or emoji/SVG icon -->
+                        <div class="card-icon-placeholder">[ ICON ]</div>
+                        <div class="card-content">
+                            <h3 class="card-title">Tool / Material Name</h3>
+                            <p class="card-desc">Add a description of this tool or material and how it was used in the project.</p>
+                            <span class="card-tag">HARDWARE</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="arsenal-card">
+                        <div class="card-icon-placeholder">[ ICON ]</div>
+                        <div class="card-content">
+                            <h3 class="card-title">Tool / Material Name</h3>
+                            <p class="card-desc">Add a description of this tool or material and how it was used in the project.</p>
+                            <span class="card-tag">SOFTWARE</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="arsenal-card">
+                        <div class="card-icon-placeholder">[ ICON ]</div>
+                        <div class="card-content">
+                            <h3 class="card-title">Tool / Material Name</h3>
+                            <p class="card-desc">Add a description of this tool or material and how it was used in the project.</p>
+                            <span class="card-tag">COMPONENT</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="arsenal-card">
+                        <div class="card-icon-placeholder">[ ICON ]</div>
+                        <div class="card-content">
+                            <h3 class="card-title">Tool / Material Name</h3>
+                            <p class="card-desc">Add a description of this tool or material and how it was used in the project.</p>
+                            <span class="card-tag">RESOURCE</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="arsenal-card">
+                        <div class="card-icon-placeholder">[ ICON ]</div>
+                        <div class="card-content">
+                            <h3 class="card-title">Tool / Material Name</h3>
+                            <p class="card-desc">Add a description of this tool or material and how it was used in the project.</p>
+                            <span class="card-tag">HARDWARE</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="arsenal-card">
+                        <div class="card-icon-placeholder">[ ICON ]</div>
+                        <div class="card-content">
+                            <h3 class="card-title">Tool / Material Name</h3>
+                            <p class="card-desc">Add a description of this tool or material and how it was used in the project.</p>
+                            <span class="card-tag">SOFTWARE</span>
+                        </div>
+                    </div>
+
+                </div><!-- /arsenal-grid -->
+
+            </div><!-- /section-body -->
+        </section><!-- /section-arsenal -->
+
+
+        <!-- ══════════════════════════════════════════
+             SECTION 3: FIELD OPERATIONS
+             ══════════════════════════════════════════ -->
+        <section class="section-page" id="section-field-operations">
+            <div class="section-header">
+                <div class="section-title-bar">
+                    <span class="section-icon">◆</span>
+                    <h1 class="section-title">FIELD OPERATIONS</h1>
+                    <span class="section-status">// ACTIVE</span>
+                </div>
+                <!-- EDIT: Update the subtitle below -->
+                <div class="section-subtitle">Build Process &amp; Mission Log</div>
+            </div>
+
+            <div class="section-body">
+
+                <!-- EDIT: Add, remove or edit timeline entries below -->
+                <div class="ops-timeline">
+
+                    <!-- Entry 1 -->
+                    <div class="ops-entry">
+                        <div class="ops-timestamp">
+                            <!-- EDIT: Replace with actual date/phase -->
+                            <span class="ops-date">PHASE 01</span>
+                            <span class="ops-time">2024-01-01</span>
+                        </div>
+                        <div class="ops-connector">
+                            <div class="ops-node"></div>
+                            <div class="ops-line"></div>
+                        </div>
+                        <div class="ops-content">
+                            <!-- EDIT: Replace title and description -->
+                            <h3 class="ops-title">Phase / Step Title</h3>
+                            <p class="ops-desc">Describe what happened during this phase. What did you build, design, test, or decide? Add as much detail as you like.</p>
+                            <!-- EDIT: Replace this div with <img src="your-image.jpg" alt="Phase 1"> -->
+                            <div class="media-placeholder ops-media">
+                                <span class="media-placeholder-text">[ INSERT IMAGE ]</span>
+                                <span class="media-placeholder-sub">Add an image or screenshot for this phase</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Entry 2 -->
+                    <div class="ops-entry">
+                        <div class="ops-timestamp">
+                            <span class="ops-date">PHASE 02</span>
+                            <span class="ops-time">2024-02-01</span>
+                        </div>
+                        <div class="ops-connector">
+                            <div class="ops-node"></div>
+                            <div class="ops-line"></div>
+                        </div>
+                        <div class="ops-content">
+                            <h3 class="ops-title">Phase / Step Title</h3>
+                            <p class="ops-desc">Describe what happened during this phase. What challenges did you face? How did you solve them?</p>
+                            <div class="media-placeholder ops-media">
+                                <span class="media-placeholder-text">[ INSERT IMAGE ]</span>
+                                <span class="media-placeholder-sub">Add an image or screenshot for this phase</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Entry 3 -->
+                    <div class="ops-entry">
+                        <div class="ops-timestamp">
+                            <span class="ops-date">PHASE 03</span>
+                            <span class="ops-time">2024-03-01</span>
+                        </div>
+                        <div class="ops-connector">
+                            <div class="ops-node"></div>
+                            <div class="ops-line"></div>
+                        </div>
+                        <div class="ops-content">
+                            <h3 class="ops-title">Phase / Step Title</h3>
+                            <p class="ops-desc">Describe what happened during this phase. What did you learn or accomplish?</p>
+                            <div class="media-placeholder ops-media">
+                                <span class="media-placeholder-text">[ INSERT IMAGE ]</span>
+                                <span class="media-placeholder-sub">Add an image or screenshot for this phase</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Entry 4 -->
+                    <div class="ops-entry">
+                        <div class="ops-timestamp">
+                            <span class="ops-date">PHASE 04</span>
+                            <span class="ops-time">2024-04-01</span>
+                        </div>
+                        <div class="ops-connector">
+                            <div class="ops-node"></div>
+                            <!-- No line after last entry -->
+                        </div>
+                        <div class="ops-content">
+                            <h3 class="ops-title">Phase / Step Title</h3>
+                            <p class="ops-desc">Describe the final phase of your build process. What was the result?</p>
+                            <div class="media-placeholder ops-media">
+                                <span class="media-placeholder-text">[ INSERT IMAGE ]</span>
+                                <span class="media-placeholder-sub">Add an image or screenshot for this phase</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- /ops-timeline -->
+
+            </div><!-- /section-body -->
+        </section><!-- /section-field-operations -->
+
+
+        <!-- ══════════════════════════════════════════
+             SECTION 4: MISSION DEBRIEF
+             ══════════════════════════════════════════ -->
+        <section class="section-page" id="section-mission-debrief">
+            <div class="section-header">
+                <div class="section-title-bar">
+                    <span class="section-icon">◆</span>
+                    <h1 class="section-title">MISSION DEBRIEF</h1>
+                    <span class="section-status">// ACTIVE</span>
+                </div>
+                <!-- EDIT: Update the subtitle below -->
+                <div class="section-subtitle">Final Result &amp; Project Showcase</div>
+            </div>
+
+            <div class="section-body">
+
+                <!-- Hero Showcase -->
+                <div class="section-block">
+                    <div class="block-header">
+                        <span class="block-icon">◆</span>
+                        <h3 class="block-title">FINAL RESULT</h3>
+                    </div>
+                    <!-- EDIT: Replace this placeholder with your main showcase image/video -->
+                    <div class="media-placeholder debrief-hero-media">
+                        <span class="media-placeholder-text">[ INSERT FINAL PROJECT IMAGE ]</span>
+                        <span class="media-placeholder-sub">Replace with your hero showcase image or video embed</span>
+                    </div>
+                </div>
+
+                <!-- Outcomes Summary -->
+                <div class="section-block">
+                    <div class="block-header">
+                        <span class="block-icon">◆</span>
+                        <h3 class="block-title">OUTCOMES &amp; RESULTS</h3>
+                    </div>
+                    <!-- EDIT: Update these outcome cards with your actual results/metrics -->
+                    <div class="outcomes-grid">
+                        <div class="outcome-card">
+                            <span class="outcome-value">100%</span>
+                            <span class="outcome-label">Add a metric or result</span>
+                        </div>
+                        <div class="outcome-card">
+                            <span class="outcome-value">✓</span>
+                            <span class="outcome-label">Goal achieved description</span>
+                        </div>
+                        <div class="outcome-card">
+                            <span class="outcome-value">+X</span>
+                            <span class="outcome-label">Another result or achievement</span>
+                        </div>
+                        <div class="outcome-card">
+                            <span class="outcome-value">A+</span>
+                            <span class="outcome-label">Rating / grade / feedback</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Grid -->
+                <div class="section-block">
+                    <div class="block-header">
+                        <span class="block-icon">◆</span>
+                        <h3 class="block-title">GALLERY</h3>
+                    </div>
+                    <!-- EDIT: Replace each placeholder with your gallery images -->
+                    <div class="gallery-grid">
+                        <div class="media-placeholder gallery-item">
+                            <span class="media-placeholder-text">[ IMAGE ]</span>
+                        </div>
+                        <div class="media-placeholder gallery-item">
+                            <span class="media-placeholder-text">[ IMAGE ]</span>
+                        </div>
+                        <div class="media-placeholder gallery-item">
+                            <span class="media-placeholder-text">[ IMAGE ]</span>
+                        </div>
+                        <div class="media-placeholder gallery-item">
+                            <span class="media-placeholder-text">[ IMAGE ]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Final Notes -->
+                <div class="section-block">
+                    <div class="block-header">
+                        <span class="block-icon">◆</span>
+                        <h3 class="block-title">FINAL NOTES</h3>
+                    </div>
+                    <!-- EDIT: Replace this text with your conclusions, reflections, or next steps -->
+                    <div class="final-notes">
+                        <p>Add your final thoughts, conclusions, lessons learned, and any next steps here. What would you do differently? What are you most proud of?</p>
+                    </div>
+                </div>
+
+            </div><!-- /section-body -->
+        </section><!-- /section-mission-debrief -->
 
     </main>
 
@@ -223,5 +510,6 @@
     <script src="js/loading.js"></script>
     <script src="js/particles.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
 </body>
 </html>

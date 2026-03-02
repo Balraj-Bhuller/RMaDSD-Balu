@@ -1,13 +1,5 @@
 (function(){
     'use strict';
-    var navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(function(link){
-        link.addEventListener('click', function(e){
-            e.preventDefault();
-            navLinks.forEach(function(l){ l.classList.remove('active'); });
-            link.classList.add('active');
-        });
-    });
     function animateCounters(){
         document.querySelectorAll('.counter').forEach(function(el){
             var target = parseFloat(el.getAttribute('data-target'));
