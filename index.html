@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RMaDSD-Balu // Command Interface</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <!-- Scan-line overlay -->
+    <div class="scanline-overlay"></div>
+
+    <!-- Particle canvas background -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-logo">
+            <span class="logo-bracket">[</span>
+            <span class="logo-text">RMaDSD</span>
+            <span class="logo-bracket">]</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" class="nav-link active" data-section="systems">SYSTEMS</a></li>
+            <li><a href="#" class="nav-link" data-section="command">COMMAND</a></li>
+            <li><a href="#" class="nav-link" data-section="intel">INTEL</a></li>
+            <li><a href="#" class="nav-link" data-section="archive">ARCHIVE</a></li>
+            <li><a href="#" class="nav-link" data-section="network">NETWORK</a></li>
+        </ul>
+        <div class="nav-status">
+            <span class="status-indicator online"></span>
+            <span class="status-text">UPLINK ACTIVE</span>
+        </div>
+    </nav>
+
+    <!-- Main Content Grid -->
+    <main class="hud-grid">
+
+        <!-- Left Sidebar: System Status -->
+        <aside class="panel panel-left" id="system-status">
+            <div class="panel-corner tl"></div>
+            <div class="panel-corner tr"></div>
+            <div class="panel-corner bl"></div>
+            <div class="panel-corner br"></div>
+            <div class="panel-header">
+                <span class="panel-icon">◆</span>
+                <h2>SYSTEM STATUS</h2>
+            </div>
+            <div class="panel-content">
+                <ul class="status-list">
+                    <li class="status-item">
+                        <span class="status-dot online"></span>
+                        <span class="status-name">CORE PROCESSOR</span>
+                        <span class="status-value online">ONLINE</span>
+                    </li>
+                    <li class="status-item">
+                        <span class="status-dot online"></span>
+                        <span class="status-name">NEURAL NETWORK</span>
+                        <span class="status-value online">ONLINE</span>
+                    </li>
+                    <li class="status-item">
+                        <span class="status-dot warning"></span>
+                        <span class="status-name">FIREWALL MATRIX</span>
+                        <span class="status-value warning">CAUTION</span>
+                    </li>
+                    <li class="status-item">
+                        <span class="status-dot online"></span>
+                        <span class="status-name">DATA STREAM</span>
+                        <span class="status-value online">ONLINE</span>
+                    </li>
+                    <li class="status-item">
+                        <span class="status-dot offline"></span>
+                        <span class="status-name">QUANTUM RELAY</span>
+                        <span class="status-value offline">OFFLINE</span>
+                    </li>
+                    <li class="status-item">
+                        <span class="status-dot online"></span>
+                        <span class="status-name">ENCRYPTION</span>
+                        <span class="status-value online">ONLINE</span>
+                    </li>
+                    <li class="status-item">
+                        <span class="status-dot warning"></span>
+                        <span class="status-name">SATELLITE LINK</span>
+                        <span class="status-value warning">UNSTABLE</span>
+                    </li>
+                    <li class="status-item">
+                        <span class="status-dot online"></span>
+                        <span class="status-name">MEMORY BANKS</span>
+                        <span class="status-value online">ONLINE</span>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Center: Command Panel -->
+        <section class="panel panel-center" id="command-center">
+            <div class="panel-corner tl"></div>
+            <div class="panel-corner tr"></div>
+            <div class="panel-corner bl"></div>
+            <div class="panel-corner br"></div>
+            <div class="panel-header">
+                <span class="panel-icon">◆</span>
+                <h2>COMMAND CENTER</h2>
+                <span class="panel-badge">CLASSIFIED</span>
+            </div>
+            <div class="panel-content">
+                <div class="command-hero">
+                    <div class="hex-decorator"></div>
+                    <h1 class="glitch-text" data-text="RMaDSD INTERFACE">RMaDSD INTERFACE</h1>
+                    <p class="command-subtitle">ADVANCED TACTICAL OPERATIONS SYSTEM v4.7.2</p>
+                </div>
+                <div class="command-stats">
+                    <div class="stat-box">
+                        <span class="stat-label">THREAT LEVEL</span>
+                        <span class="stat-value" data-target="LOW">LOW</span>
+                        <div class="stat-bar"><div class="stat-fill" style="width: 25%;"></div></div>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">SYSTEM INTEGRITY</span>
+                        <span class="stat-value" data-target="94.7">94.7%</span>
+                        <div class="stat-bar"><div class="stat-fill" style="width: 94.7%;"></div></div>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">ACTIVE PROTOCOLS</span>
+                        <span class="stat-value counter" data-target="2847">0</span>
+                        <div class="stat-bar"><div class="stat-fill" style="width: 72%;"></div></div>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">NETWORK COVERAGE</span>
+                        <span class="stat-value" data-target="87.3">87.3%</span>
+                        <div class="stat-bar"><div class="stat-fill" style="width: 87.3%;"></div></div>
+                    </div>
+                </div>
+                <div class="command-readout">
+                    <div class="readout-line">> INITIALIZING COMMAND INTERFACE...</div>
+                    <div class="readout-line">> ALL SYSTEMS NOMINAL</div>
+                    <div class="readout-line">> SECURE CHANNEL ESTABLISHED</div>
+                    <div class="readout-line">> AWAITING OPERATOR INPUT<span class="cursor-blink">_</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Sidebar: Network Feed -->
+        <aside class="panel panel-right" id="network-feed">
+            <div class="panel-corner tl"></div>
+            <div class="panel-corner tr"></div>
+            <div class="panel-corner bl"></div>
+            <div class="panel-corner br"></div>
+            <div class="panel-header">
+                <span class="panel-icon">◆</span>
+                <h2>INTEL FEED</h2>
+            </div>
+            <div class="panel-content">
+                <div class="feed-list" id="feed-list">
+                    <!-- Feed items injected by JS -->
+                </div>
+            </div>
+        </aside>
+
+    </main>
+
+    <!-- Bottom Stats Bar -->
+    <footer class="bottom-bar">
+        <div class="bottom-stat">
+            <span class="bottom-label">UPLINK</span>
+            <span class="bottom-value counter" data-target="98.7" data-suffix="%">0%</span>
+        </div>
+        <div class="bottom-stat">
+            <span class="bottom-label">NODES</span>
+            <span class="bottom-value counter" data-target="2847">0</span>
+        </div>
+        <div class="bottom-stat">
+            <span class="bottom-label">LATENCY</span>
+            <span class="bottom-value counter" data-target="12" data-suffix="ms">0ms</span>
+        </div>
+        <div class="bottom-stat">
+            <span class="bottom-label">BANDWIDTH</span>
+            <span class="bottom-value counter" data-target="847" data-suffix=" TB/s">0 TB/s</span>
+        </div>
+        <div class="bottom-stat">
+            <span class="bottom-label">ENCRYPTION</span>
+            <span class="bottom-value">AES-512</span>
+        </div>
+        <div class="bottom-stat">
+            <span class="bottom-label">SESSION</span>
+            <span class="bottom-value" id="session-time">00:00:00</span>
+        </div>
+    </footer>
+
+    <script src="js/particles.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
